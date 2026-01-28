@@ -2,7 +2,7 @@
 $host = "localhost";
 $user = "root";
 $pass = "StrongRootPassword123";
-$db   = "25123800";
+$db   = "ticketing_system";
 
 $conn = new mysqli($host, $user, $pass, $db);
 
