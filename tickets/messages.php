@@ -3,8 +3,23 @@ require "../includes/auth_check.php";
 require "../config/db.php";
 include "../includes/header.php";
 
-$id = $_GET["id"];
+$id = (int)($_GET["id"] ?? 0);
 $isAdmin = $_SESSION["role"] === "admin";
+
+if ($id <= 0) {
+    die("Invalid ticket");
+}
+
+$ticketStmt = $conn->prepare(
+    "SELECT ticket_id, user_id FROM tickets WHERE ticket_id = ?"
+);
+$ticketStmt->bind_param("i", $id);
+$ticketStmt->execute();
+$ticket = $ticketStmt->get_result()->fetch_assoc();
+
+if (!$ticket || (!$isAdmin && (int)$ticket["user_id"] !== (int)$_SESSION["user_id"])) {
+    die("Access denied");
+}
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["message"])) {
     $stmt = $conn->prepare(
@@ -15,13 +30,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["message"])) {
     $stmt->execute();
 }
 
-$messages = $conn->query(
+$messagesStmt = $conn->prepare(
     "SELECT tm.message_text, tm.date_sent, u.name
      FROM ticket_messages tm
      JOIN users u ON tm.sender_id=u.user_id
-     WHERE tm.ticket_id=$id
+     WHERE tm.ticket_id=?
      ORDER BY tm.date_sent"
 );
+$messagesStmt->bind_param("i", $id);
+$messagesStmt->execute();
+$messages = $messagesStmt->get_result();
 ?>
 
 <div class="container">
@@ -57,4 +75,3 @@ $messages = $conn->query(
 </div>
 
 <?php include "../includes/footer.php"; ?>
-

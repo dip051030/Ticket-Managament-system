@@ -351,3 +351,13 @@ select:focus {
     }
 }
 
+.flash{
+margin:1rem auto;
+max-width:1100px;
+padding:.75rem 1rem;
+border-radius:6px;
+font-size:.85rem
+}
+.flash.success{background:#ecfdf5;color:#065f46}
+.flash.error{background:#fef2f2;color:#991b1b}
+

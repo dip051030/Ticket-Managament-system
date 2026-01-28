@@ -2,8 +2,12 @@
 require "../includes/auth_check.php";
 require "../config/db.php";
 
-$id  = $_GET["id"];
+$id  = (int)($_GET["id"] ?? 0);
 $uid = $_SESSION["user_id"];
+
+if ($id <= 0) {
+    die("Invalid ticket");
+}
 
 $stmt = $conn->prepare(
     "SELECT * FROM tickets
@@ -29,6 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     );
     $stmt->execute();
     header("Location: view.php");
+    exit;
 }
 ?>
 
@@ -40,4 +45,3 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <textarea name="description" required><?= htmlspecialchars($ticket["description"]) ?></textarea>
     <button>Update</button>
 </form>
-

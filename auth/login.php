@@ -1,35 +1,28 @@
 <?php
 require "../config/db.php";
+require "../includes/flash.php";
 session_start();
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $stmt = $conn->prepare("SELECT * FROM users WHERE email=?");
-    $stmt->bind_param("s", $_POST["email"]);
+if ($_SERVER["REQUEST_METHOD"]==="POST") {
+    $stmt=$conn->prepare("SELECT * FROM users WHERE email=?");
+    $stmt->bind_param("s",$_POST["email"]);
     $stmt->execute();
-    $user = $stmt->get_result()->fetch_assoc();
+    $u=$stmt->get_result()->fetch_assoc();
 
-    if ($user && password_verify($_POST["password"], $user["password"])) {
-        $_SESSION["user_id"] = $user["user_id"];
-        $_SESSION["role"] = $user["role"];
-        header("Location: /dashboard.php");
-        exit;
+    if($u && password_verify($_POST["password"],$u["password"])) {
+        $_SESSION["user_id"]=$u["user_id"];
+        $_SESSION["role"]=$u["role"];
+        set_flash("Welcome back");
+        header("Location:/dashboard.php"); exit;
     }
-}
 
-include "../includes/header.php";
+    set_flash("Invalid email or password","error");
+}
 ?>
 
-<div class="card">
-<form method="POST" class="form-group">
-    <label>Email</label>
-    <input type="email" name="email" required autofocus>
-
-    <label>Password</label>
-    <input type="password" name="password" required>
-
-    <button class="btn-primary">Login</button>
+<form method="POST" class="card">
+<input name="email" placeholder="Email" required>
+<input type="password" name="password" placeholder="Password" required>
+<button>Login</button>
 </form>
-</div>
-
-<?php include "../includes/footer.php"; ?>
 
