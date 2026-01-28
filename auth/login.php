@@ -21,8 +21,16 @@ if ($_SERVER["REQUEST_METHOD"]==="POST") {
 ?>
 
 <form method="POST" class="card">
-<input name="email" placeholder="Email" required>
-<input type="password" name="password" placeholder="Password" required>
-<button>Login</button>
+    <div class="page-header">
+        <h2>Login</h2>
+    </div>
+    <div class="form-group">
+        <input name="email" type="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button>Login</button>
+    </div>
+    <p style="margin-top: 1rem; font-size: 0.85rem;">
+        Don't have an account? <a href="/auth/register.php">Register</a>
+    </p>
 </form>
 

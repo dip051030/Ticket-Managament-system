@@ -25,10 +25,18 @@ if ($_SERVER["REQUEST_METHOD"]==="POST") {
 ?>
 
 <form method="POST" class="card">
-<input name="name" placeholder="Name" required>
-<input name="email" type="email" placeholder="Email" required>
-<input type="password" name="password" placeholder="Password" required>
-<input type="password" name="confirm" placeholder="Confirm Password" required>
-<button>Register</button>
+    <div class="page-header">
+        <h2>Register</h2>
+    </div>
+    <div class="form-group">
+        <input name="name" placeholder="Name" required>
+        <input name="email" type="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password (min 8 chars)" required>
+        <input type="password" name="confirm" placeholder="Confirm Password" required>
+        <button>Register</button>
+    </div>
+    <p style="margin-top: 1rem; font-size: 0.85rem;">
+        Already have an account? <a href="/auth/login.php">Login</a>
+    </p>
 </form>
 

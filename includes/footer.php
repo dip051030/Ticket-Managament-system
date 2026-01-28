@@ -12,7 +12,7 @@
         <div class="footer-section">
             <div class="footer-title">Account</div>
             <div class="footer-links">
-                <a href="/logout.php">Logout</a>
+                <a href="/auth/logout.php">Logout</a>
             </div>
         </div>
 
@@ -26,12 +26,14 @@
 
     if (navToggle && navLinks) {
         navToggle.addEventListener("click", function () {
-            navLinks.classList.toggle("active");
+            navLinks.classList.toggle("show");
+            navToggle.classList.toggle("active");
         });
 
         document.addEventListener("click", function (e) {
             if (!navToggle.contains(e.target) && !navLinks.contains(e.target)) {
-                navLinks.classList.remove("active");
+                navLinks.classList.remove("show");
+                navToggle.classList.remove("active");
             }
         });
     }

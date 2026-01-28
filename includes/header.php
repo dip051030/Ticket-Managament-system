@@ -11,7 +11,11 @@
 
 <nav>
     <a class="nav-brand" href="/dashboard.php">TicketSys</a>
-    <button id="navToggle" class="nav-toggle">☰</button>
+    <button id="navToggle" class="nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
     <div id="navLinks" class="nav-links">
         <a href="/dashboard.php">Dashboard</a>
         <a href="/tickets/create.php">New Ticket</a>

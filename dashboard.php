@@ -98,12 +98,15 @@ if ($isAdmin) {
             <?= $t["status"] ?>
         </span>
 
-        <?php if ($isAdmin): ?>
-        <form method="POST" action="/tickets/delete.php">
-            <input type="hidden" name="ticket_id" value="<?= $t["ticket_id"] ?>">
-            <button>Delete</button>
-        </form>
-        <?php endif; ?>
+        <div style="display:flex; gap:.5rem;">
+            <a href="/tickets/messages.php?id=<?= $t["ticket_id"] ?>" class="btn-primary" style="padding: 0.4rem 0.8rem;">View</a>
+            <?php if ($isAdmin): ?>
+            <form method="POST" action="/tickets/delete.php" onsubmit="return confirm('Are you sure?')">
+                <input type="hidden" name="ticket_id" value="<?= $t["ticket_id"] ?>">
+                <button style="padding: 0.4rem 0.8rem; background: #dc2626;">Delete</button>
+            </form>
+            <?php endif; ?>
+        </div>
     </div>
 </div>
 <?php endwhile; ?>
