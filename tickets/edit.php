@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 include "../includes/header.php";
 ?>
 
-<div class="container" style="max-width: 600px;">
+<div class="container max-w-600">
     <div class="card">
         <div class="page-header">
             <h2>Edit Ticket</h2>
@@ -47,16 +47,16 @@ include "../includes/header.php";
 
         <form method="POST" class="form-group">
             <div class="form-group">
-                <label style="font-size: 0.85rem; font-weight: 600; color: var(--text-main);">Subject</label>
+                <label class="text-sm font-semibold">Subject</label>
                 <input name="subject" value="<?= htmlspecialchars($ticket["subject"]) ?>" required>
             </div>
             <div class="form-group">
-                <label style="font-size: 0.85rem; font-weight: 600; color: var(--text-main);">Description</label>
+                <label class="text-sm font-semibold">Description</label>
                 <textarea name="description" required style="min-height: 150px;"><?= htmlspecialchars($ticket["description"]) ?></textarea>
             </div>
-            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
-                <button style="flex: 1;">Update Ticket</button>
-                <a href="/dashboard.php" class="btn-primary" style="background: var(--bg-muted); color: var(--text-main); flex: 1;">Cancel</a>
+            <div class="flex gap-2 mt-2">
+                <button class="flex-1">Update Ticket</button>
+                <a href="/dashboard.php" class="btn-primary flex-1" style="background: var(--bg-muted); color: var(--text-main);">Cancel</a>
             </div>
         </form>
     </div>

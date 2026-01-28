@@ -105,13 +105,13 @@ if ($isAdmin) {
 
 <?php if ($isAdmin): ?>
 <!-- ===== TOP USERS ===== -->
-<div class="card analytics-section" style="margin-bottom: 1.5rem;">
+<div class="card analytics-section mt-3">
     <h3>Most Active Users</h3>
 
     <?php while ($u = $topUsers->fetch_assoc()): ?>
         <div class="analytics-row">
-            <span><?= htmlspecialchars($u["name"]) ?></span>
-            <strong><?= $u["total"] ?> tickets</strong>
+            <span class="text-sm"><?= htmlspecialchars($u["name"]) ?></span>
+            <strong class="text-sm"><?= $u["total"] ?> tickets</strong>
         </div>
     <?php endwhile; ?>
 </div>
@@ -128,8 +128,8 @@ if ($isAdmin) {
     <?php while ($t = $recent->fetch_assoc()): ?>
         <div class="analytics-row">
             <div>
-                <strong><?= htmlspecialchars($t["subject"]) ?></strong><br>
-                <small><?= date("d M Y, H:i", strtotime($t["date_created"])) ?></small>
+                <strong class="text-sm"><?= htmlspecialchars($t["subject"]) ?></strong><br>
+                <small class="text-xs"><?= date("d M Y, H:i", strtotime($t["date_created"])) ?></small>
             </div>
 
             <span class="badge status-<?= strtolower(str_replace(' ','-',$t["status"])) ?>">

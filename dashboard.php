@@ -80,7 +80,7 @@ if ($isAdmin) {
 
 <a href="/tickets/create.php" class="btn-primary">+ New Ticket</a>
 
-<div class="ticket-list" style="margin-top:1.5rem;">
+<div class="ticket-list mt-3">
 <?php while ($t = $tickets->fetch_assoc()): ?>
 <div class="ticket-item">
     <div class="ticket-content">
@@ -92,20 +92,20 @@ if ($isAdmin) {
         <small><?= date("d M Y, H:i", strtotime($t["date_created"])) ?></small>
     </div>
 
-    <div style="display:flex; gap:.5rem; align-items:center;">
+    <div class="flex gap-1 items-center">
         <span class="badge status-<?= strtolower(str_replace(' ','-',$t["status"])) ?>">
             <?= htmlspecialchars($t["status"]) ?>
         </span>
 
-        <div style="display:flex; gap:.5rem;">
-            <a href="/tickets/messages.php?id=<?= $t["ticket_id"] ?>" class="btn-primary" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;">View</a>
+        <div class="flex gap-1">
+            <a href="/tickets/messages.php?id=<?= $t["ticket_id"] ?>" class="btn-primary text-xs" style="padding: 0.4rem 0.8rem;">View</a>
             <?php if ($t["status"] === 'Open' && !$isAdmin): ?>
-            <a href="/tickets/edit.php?id=<?= $t["ticket_id"] ?>" class="btn-primary" style="padding: 0.4rem 0.8rem; font-size: 0.75rem; background: var(--bg-muted); color: var(--text-main);">Edit</a>
+            <a href="/tickets/edit.php?id=<?= $t["ticket_id"] ?>" class="btn-primary text-xs" style="padding: 0.4rem 0.8rem; background: var(--bg-muted); color: var(--text-main);">Edit</a>
             <?php endif; ?>
             <?php if ($isAdmin): ?>
             <form method="POST" action="/tickets/delete.php" onsubmit="return confirm('Are you sure?')">
                 <input type="hidden" name="ticket_id" value="<?= $t["ticket_id"] ?>">
-                <button class="btn-danger" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;">Delete</button>
+                <button class="btn-danger text-xs" style="padding: 0.4rem 0.8rem;">Delete</button>
             </form>
             <?php endif; ?>
         </div>

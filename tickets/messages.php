@@ -53,22 +53,22 @@ $messages = $messagesStmt->get_result();
 <div class="container">
 <div class="card">
 
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+<div class="flex justify-between items-center mt-3">
     <div>
-        <h2 style="font-size: 1.25rem;">Ticket #<?= $id ?></h2>
+        <h2 class="text-sm font-semibold">Ticket #<?= $id ?></h2>
         <span class="badge status-<?= strtolower(str_replace(' ','-',$ticket["status"])) ?>">
             <?= htmlspecialchars($ticket["status"]) ?>
         </span>
     </div>
-    <a href="/dashboard.php" class="btn-primary" style="background: var(--bg-muted); color: var(--text-main); font-size: 0.75rem;">Back to Dashboard</a>
+    <a href="/dashboard.php" class="btn-primary text-xs" style="background: var(--bg-muted); color: var(--text-main);">Back to Dashboard</a>
 </div>
 
 <?php if ($isAdmin): ?>
-<div class="card" style="margin-bottom: 1.5rem; padding: 1rem;">
-    <h3 style="font-size: 0.9rem; margin-bottom: 0.75rem;">Manage Ticket Status</h3>
-    <form method="POST" action="/tickets/update_status.php" style="display: flex; gap: 0.5rem;">
+<div class="card mt-3" style="padding: 1rem;">
+    <h3 class="text-sm font-semibold mt-1">Manage Ticket Status</h3>
+    <form method="POST" action="/tickets/update_status.php" class="flex gap-1">
         <input type="hidden" name="ticket_id" value="<?= $id ?>">
-        <select name="status" style="flex: 1;">
+        <select name="status" class="flex-1">
             <?php foreach (["Open", "In Progress", "Closed"] as $st): ?>
                 <option <?= $ticket["status"] === $st ? "selected" : "" ?>><?= $st ?></option>
             <?php endforeach; ?>
