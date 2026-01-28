@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"]==="POST") {
         $_SESSION["user_id"]=$u["user_id"];
         $_SESSION["role"]=$u["role"];
         set_flash("Welcome back");
-        header("Location:/dashboard.php"); exit;
+        header("Location:/index.php"); exit;
     }
 
     set_flash("Invalid email or password","error");

@@ -1,10 +1,5 @@
 <?php
-session_start();
-
-if (isset($_SESSION["user_id"])) {
-    header("Location: /dashboard.php");
-    exit;
-}
+if (session_status() === PHP_SESSION_NONE) session_start();
 
 include "includes/header.php";
 ?>
@@ -17,8 +12,12 @@ include "includes/header.php";
         </div>
 
         <div class="auth-hero-actions">
-            <a class="btn-primary" href="/auth/login.php">Login to your account</a>
-            <a href="/auth/register.php" class="auth-secondary-link">New here? <span>Create an account</span></a>
+            <?php if (!isset($_SESSION["user_id"])): ?>
+                <a class="btn-primary" href="/auth/login.php">Login to your account</a>
+                <a href="/auth/register.php" class="auth-secondary-link">New here? <span>Create an account</span></a>
+            <?php else: ?>
+                <a class="btn-primary" href="/dashboard.php">Go to Dashboard</a>
+            <?php endif; ?>
         </div>
     </div>
 </div>
