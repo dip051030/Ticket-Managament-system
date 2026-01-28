@@ -22,21 +22,27 @@ if ($_SERVER["REQUEST_METHOD"]==="POST") {
         }
     }
 }
+include "../includes/header.php";
 ?>
 
-<form method="POST" class="card">
-    <div class="page-header">
-        <h2>Register</h2>
-    </div>
-    <div class="form-group">
-        <input name="name" placeholder="Name" required>
-        <input name="email" type="email" placeholder="Email" required>
-        <input type="password" name="password" placeholder="Password (min 8 chars)" required>
-        <input type="password" name="confirm" placeholder="Confirm Password" required>
-        <button>Register</button>
-    </div>
-    <p style="margin-top: 1rem; font-size: 0.85rem;">
-        Already have an account? <a href="/auth/login.php">Login</a>
-    </p>
-</form>
+<div class="auth-form">
+    <form method="POST" class="card">
+        <div class="page-header">
+            <h2>Register</h2>
+            <p class="page-sub">Create your SupportPortal account</p>
+        </div>
+        <div class="form-group">
+            <input name="name" placeholder="Name" required>
+            <input name="email" type="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password (min 8 chars)" required>
+            <input type="password" name="confirm" placeholder="Confirm Password" required>
+            <button>Register</button>
+        </div>
+        <p style="margin-top: 1.5rem; font-size: 0.85rem; text-align: center; color: var(--text-muted);">
+            Already have an account? <a href="/auth/login.php" style="color: var(--accent); font-weight: 600;">Login</a>
+        </p>
+    </form>
+</div>
+
+<?php include "../includes/footer.php"; ?>
 

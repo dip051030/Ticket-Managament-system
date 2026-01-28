@@ -2,7 +2,7 @@
     <div class="footer-inner">
 
         <div class="footer-section">
-            <div class="footer-title">System</div>
+            <div class="footer-title">Navigation</div>
             <div class="footer-links">
                 <a href="/dashboard.php">Dashboard</a>
                 <a href="/tickets/create.php">New Ticket</a>
@@ -12,10 +12,26 @@
         <div class="footer-section">
             <div class="footer-title">Account</div>
             <div class="footer-links">
-                <a href="/auth/logout.php">Logout</a>
+                <?php if (isset($_SESSION["user_id"])): ?>
+                    <a href="/auth/logout.php">Logout</a>
+                <?php else: ?>
+                    <a href="/auth/login.php">Login</a>
+                    <a href="/auth/register.php">Register</a>
+                <?php endif; ?>
             </div>
         </div>
 
+        <div class="footer-section">
+            <div class="footer-title">Support</div>
+            <div class="footer-links">
+                <span>Email: support@example.com</span>
+                <span>Response time: 24h</span>
+            </div>
+        </div>
+
+    </div>
+    <div class="footer-bottom">
+        &copy; <?= date("Y") ?> SupportPortal. All rights reserved.
     </div>
 </footer>
 

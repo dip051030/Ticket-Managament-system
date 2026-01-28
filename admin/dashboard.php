@@ -57,10 +57,11 @@ if ($isAdmin) {
         WHERE user_id=$userId
         ORDER BY date_created DESC
         LIMIT 10
-    );
+    ");
 }
 ?>
 
+<div class="container">
 <div class="page-header">
     <h2><?= $isAdmin ? "Admin Analytics Dashboard" : "My Activity Dashboard" ?></h2>
     <p class="page-sub">
@@ -105,7 +106,7 @@ if ($isAdmin) {
 
 <?php if ($isAdmin): ?>
 <!-- ===== TOP USERS ===== -->
-<div class="card analytics-section">
+<div class="card analytics-section" style="margin-bottom: 1.5rem;">
     <h3>Most Active Users</h3>
 
     <?php while ($u = $topUsers->fetch_assoc()): ?>
@@ -133,10 +134,11 @@ if ($isAdmin) {
             </div>
 
             <span class="badge status-<?= strtolower(str_replace(' ','-',$t["status"])) ?>">
-                <?= $t["status"] ?>
+                <?= htmlspecialchars($t["status"]) ?>
             </span>
         </div>
     <?php endwhile; ?>
+</div>
 </div>
 
 <?php include "../includes/footer.php"; ?>

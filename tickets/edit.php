@@ -32,16 +32,34 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $id
     );
     $stmt->execute();
-    header("Location: view.php");
+    header("Location: messages.php?id=$id");
     exit;
 }
+include "../includes/header.php";
 ?>
 
-<h2>Edit Ticket</h2>
+<div class="container" style="max-width: 600px;">
+    <div class="card">
+        <div class="page-header">
+            <h2>Edit Ticket</h2>
+            <p class="page-sub">Update your ticket details</p>
+        </div>
 
-<form method="POST">
-    <input name="subject"
-           value="<?= htmlspecialchars($ticket["subject"]) ?>" required>
-    <textarea name="description" required><?= htmlspecialchars($ticket["description"]) ?></textarea>
-    <button>Update</button>
-</form>
+        <form method="POST" class="form-group">
+            <div class="form-group">
+                <label style="font-size: 0.85rem; font-weight: 600; color: var(--text-main);">Subject</label>
+                <input name="subject" value="<?= htmlspecialchars($ticket["subject"]) ?>" required>
+            </div>
+            <div class="form-group">
+                <label style="font-size: 0.85rem; font-weight: 600; color: var(--text-main);">Description</label>
+                <textarea name="description" required style="min-height: 150px;"><?= htmlspecialchars($ticket["description"]) ?></textarea>
+            </div>
+            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                <button style="flex: 1;">Update Ticket</button>
+                <a href="/dashboard.php" class="btn-primary" style="background: var(--bg-muted); color: var(--text-main); flex: 1;">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<?php include "../includes/footer.php"; ?>

@@ -95,15 +95,18 @@ if ($isAdmin) {
 
     <div style="display:flex; gap:.5rem; align-items:center;">
         <span class="badge status-<?= strtolower(str_replace(' ','-',$t["status"])) ?>">
-            <?= $t["status"] ?>
+            <?= htmlspecialchars($t["status"]) ?>
         </span>
 
         <div style="display:flex; gap:.5rem;">
-            <a href="/tickets/messages.php?id=<?= $t["ticket_id"] ?>" class="btn-primary" style="padding: 0.4rem 0.8rem;">View</a>
+            <a href="/tickets/messages.php?id=<?= $t["ticket_id"] ?>" class="btn-primary" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;">View</a>
+            <?php if ($t["status"] === 'Open' && !$isAdmin): ?>
+            <a href="/tickets/edit.php?id=<?= $t["ticket_id"] ?>" class="btn-primary" style="padding: 0.4rem 0.8rem; font-size: 0.75rem; background: var(--bg-muted); color: var(--text-main);">Edit</a>
+            <?php endif; ?>
             <?php if ($isAdmin): ?>
             <form method="POST" action="/tickets/delete.php" onsubmit="return confirm('Are you sure?')">
                 <input type="hidden" name="ticket_id" value="<?= $t["ticket_id"] ?>">
-                <button style="padding: 0.4rem 0.8rem; background: #dc2626;">Delete</button>
+                <button class="btn-danger" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;">Delete</button>
             </form>
             <?php endif; ?>
         </div>

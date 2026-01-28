@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["message"])) {
 }
 
 $messagesStmt = $conn->prepare(
-    "SELECT tm.message_text, tm.date_sent, u.name
+    "SELECT tm.message_text, tm.date_sent, u.name, u.role
      FROM ticket_messages tm
      JOIN users u ON tm.sender_id=u.user_id
      WHERE tm.ticket_id=?
@@ -70,8 +70,8 @@ $messages = $messagesStmt->get_result();
 
 <div class="chat-container">
 <?php while ($m = $messages->fetch_assoc()): ?>
-<div class="bubble">
-<div class="bubble-meta"><?= $m["name"] ?> • <?= $m["date_sent"] ?></div>
+<div class="bubble <?= ($m["role"] === 'admin') ? 'admin' : 'user' ?>">
+<div class="bubble-meta"><?= htmlspecialchars($m["name"]) ?> • <?= date("d M, H:i", strtotime($m["date_sent"])) ?></div>
 <?= htmlspecialchars($m["message_text"]) ?>
 </div>
 <?php endwhile; ?>
