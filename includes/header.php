@@ -22,7 +22,7 @@
             <a href="/dashboard.php" class="<?= $curr == '/dashboard.php' ? 'active' : '' ?>">Dashboard</a>
             <a href="/tickets/create.php" class="<?= $curr == '/tickets/create.php' ? 'active' : '' ?>">New Ticket</a>
             <?php if (($_SESSION["role"] ?? "") === "admin"): ?>
-                <a href="/admin/dashboard.php" class="<?= strpos($curr, '/admin/') === 0 ? 'active' : '' ?>">Analyticss</a>
+                <a href="/admin/dashboard.php" class="<?= strpos($curr, '/admin/') === 0 ? 'active' : '' ?>">Analytics</a>
             <?php endif; ?>
             <a href="/auth/logout.php">Logout</a>
         <?php else: ?>

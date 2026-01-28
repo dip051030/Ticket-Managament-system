@@ -26,6 +26,7 @@ if ($isAdmin) {
         "SELECT
             COUNT(*) total,
             SUM(status='Open') open,
+            SUM(status='In Progress') progress,
             SUM(status='Closed') closed,
             SUM(DATE(date_created)=CURDATE()) today,
             SUM(date_created >= NOW() - INTERVAL 7 DAY) week
@@ -56,12 +57,10 @@ if ($isAdmin) {
         <strong><?= $stats["open"] ?></strong>
     </div>
 
-    <?php if ($isAdmin): ?>
     <div class="stat-card amber">
         <span>In Progress</span>
         <strong><?= $stats["progress"] ?></strong>
     </div>
-    <?php endif; ?>
 
     <div class="stat-card green">
         <span>Closed</span>
